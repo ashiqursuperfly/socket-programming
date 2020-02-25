@@ -1,14 +1,18 @@
-package client_program;
+package server;
 
-import java.util.*;
+import util.NetworkUtil;
 
-public class WriteThread implements Runnable {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class ServerWriteThread implements Runnable {
 
 	private Thread thr;
 	private NetworkUtil nc;
-	String name;
+	private String name;
 
-	public WriteThread(NetworkUtil nc, String name) {
+	public ServerWriteThread(NetworkUtil nc, String name) {
 		this.nc = nc;
 		this.name = name;
 		this.thr = new Thread(this);
@@ -25,7 +29,7 @@ public class WriteThread implements Runnable {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 		}
 		nc.closeConnection();
 	}

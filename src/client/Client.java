@@ -1,6 +1,6 @@
-package client_program;
+package client;
 
-import java.util.Scanner;
+import util.NetworkUtil;
 
 public class Client {
 	public static void main(String[] args) {
@@ -11,8 +11,8 @@ public class Client {
 
 			NetworkUtil nc = new NetworkUtil(serverAddress, serverPort);
 
-			new ReadThread(nc);
-			new WriteThread(nc, "Client");
+			new ClientReadThread(nc);
+			new ClientWriteThread(nc, "Client");
 
 		} catch (Exception e) {
 			System.out.println(e);

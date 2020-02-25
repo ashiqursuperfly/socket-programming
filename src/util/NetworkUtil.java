@@ -11,9 +11,9 @@ public class NetworkUtil {
 	private ObjectInputStream ois;
 
 	public NetworkUtil(String s, int port) {
+		System.out.println("New Client Connection establishing..");
 		try {
 			this.socket = new Socket(s, port);
-			System.out.println("New Client Connected.Establishing Connection");
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			ois = new ObjectInputStream(socket.getInputStream());
 		} catch (Exception e) {
@@ -23,7 +23,6 @@ public class NetworkUtil {
 
 	public NetworkUtil(Socket s) {
 		try {
-			System.out.println("New Client Connected.Establishing Connection");
 			this.socket = s;
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			ois = new ObjectInputStream(socket.getInputStream());

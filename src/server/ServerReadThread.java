@@ -1,12 +1,12 @@
-package server_program;
+package server;
 
 import util.NetworkUtil;
 
-public class ReadThread implements Runnable {
+public class ServerReadThread implements Runnable {
 	private Thread thr;
 	private NetworkUtil nc;
 
-	public ReadThread(NetworkUtil nc) {
+	public ServerReadThread(NetworkUtil nc) {
 		this.nc = nc;
 		this.thr = new Thread(this);
 		thr.start();
@@ -15,7 +15,6 @@ public class ReadThread implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				// TODO: handle other type of objects
 				String s = (String) nc.read();
 				if (s != null)
 					System.out.println(s);
