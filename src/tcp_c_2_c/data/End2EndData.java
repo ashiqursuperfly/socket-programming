@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class End2EndData implements Serializable {
 
-    private static final long serialVersionUID = 103115L;
-
     public String sourcePhone, destinationPhone, message;
+
+    private static final long serialVersionUID = 103106L;
 
     public End2EndData(String sourcePhone, String destinationPhone, String message) {
         this.sourcePhone = sourcePhone;
