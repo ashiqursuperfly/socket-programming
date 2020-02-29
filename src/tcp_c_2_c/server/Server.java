@@ -23,7 +23,7 @@ public class Server implements C2CServerInterface {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 var nc = new NetworkUtil(clientSocket);
-                System.out.println("Accepted Client Socket:"+clientSocket.getInetAddress().toString()+":"+clientSocket.getLocalPort());
+                System.out.println("Accepted Client Socket:"+clientSocket.getInetAddress().toString()+":"+clientSocket.getPort());
                 new ServerThread(nc);
             }
         } catch (Exception e) {
