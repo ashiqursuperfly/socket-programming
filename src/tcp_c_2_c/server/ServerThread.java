@@ -27,6 +27,7 @@ public class ServerThread implements Runnable {
 
                 } else if (o instanceof End2EndData) {
                     var endData = (End2EndData) o;
+                    System.out.println("New End2EndData : " +o);
                     var destClient = Server.getInstance().getClient(endData.destinationPhone);
                     var srcClient = Server.getInstance().getClient(endData.sourcePhone);
 

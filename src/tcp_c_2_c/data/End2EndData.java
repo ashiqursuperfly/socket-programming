@@ -13,4 +13,13 @@ public class End2EndData implements Serializable {
         this.destinationPhone = destinationPhone;
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "End2EndData{" +
+                "sourcePhone='" + sourcePhone + '\'' +
+                ", destinationPhone='" + destinationPhone + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
