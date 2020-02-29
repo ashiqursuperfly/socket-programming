@@ -1,5 +1,7 @@
 package tcp_c_2_c.client;
 
+import tcp_c_2_c.server.User;
+
 import java.util.Scanner;
 
 public class ClientMain {
@@ -14,9 +16,10 @@ public class ClientMain {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter User Name:");
             var name = sc.nextLine();
+            System.out.println("Enter User Phone:");
+            var phone = sc.nextLine();
 
-            var c = new Client(name, serverAddress, serverPort);
-            c.initClientThreads();
+            new Client(new User(name,phone), serverAddress, serverPort).initClientThreads();
 
         } catch (Exception e) {
             System.out.println(e.toString());

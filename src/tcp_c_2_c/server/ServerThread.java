@@ -6,43 +6,45 @@ import tcp_c_2_c.data.SignUpData;
 import util.NetworkUtil;
 
 public class ServerThread implements Runnable {
-	private Thread thr;
-	private NetworkUtil clientNetworkUtil;
+    private Thread thr;
+    private NetworkUtil clientNetworkUtil;
 
-	public ServerThread(NetworkUtil clientNetworkUtil) {
-		this.clientNetworkUtil = clientNetworkUtil;
-		this.thr = new Thread(this);
-		thr.start();
-	}
+    public ServerThread(NetworkUtil clientNetworkUtil) {
+        this.clientNetworkUtil = clientNetworkUtil;
+        this.thr = new Thread(this);
+        thr.start();
+    }
 
-	public void run() {
-		try {
-			while (true) {
-				Object o = clientNetworkUtil.read();
-				if (o instanceof SignUpData){
-					System.out.println("New User : "+ o);
-					var signUpData = (SignUpData) o;
-					Server.getInstance().addNewUser(generateUniqueId() , new User(signUpData.userName));
-				}
-				else if (o instanceof End2EndData){
-					//TODO: convey to end client
+    public void run() {
+        try {
+            while (true) {
+                Object o = clientNetworkUtil.read();
+                if (o instanceof SignUpData) {
+                	System.out.println("New User : " + o);
+                    var signUpData = (SignUpData) o;
+                    var u = new User(signUpData.userName, signUpData.phoneNumber);
+                    Server.getInstance().addNewClient(generateUniqueId(u), new Client(u, clientNetworkUtil));
 
+                } else if (o instanceof End2EndData) {
+                    var endData = (End2EndData) o;
+                    var destClient = Server.getInstance().getClient(endData.destinationPhone);
+					destClient.getNetworkUtil().writeUnshared(endData);
+					var srcClient = Server.getInstance().getClient(endData.sourcePhone);
 
+					System.out.println("Sending data from "+srcClient.user.userName+" to "+destClient.user.userName);
+                } else {
+                    System.out.println("Error Object Read");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            clientNetworkUtil.closeConnection();
+        }
+    }
 
-				}
-				else {
-					System.out.println("Error Object Read");
-				}
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-			clientNetworkUtil.closeConnection();
-		}
-	}
-
-	private String generateUniqueId() {
-		var id = clientNetworkUtil.getSocket().getInetAddress().toString() + clientNetworkUtil.getSocket().getPort();
-		System.out.println("Generated unique id for new client :"+id);
-		return id;
-	}
+    private String generateUniqueId(User u) {
+        var id = u.phoneNo;
+        System.out.println("Generated unique id for new client :" + id);
+        return id;
+    }
 }

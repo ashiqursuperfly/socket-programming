@@ -3,9 +3,10 @@ package tcp_c_2_c.server;
 import tcp_c_2_c.client.Client;
 
 public interface C2CServerInterface {
-    void addNewUser(String id, User u);
 
-    void removeUser(String id);
+    void addNewClient(String id, Client c);
 
-    User getUser(String id);
+    void removeClient(String id);
+
+    Client getClient(String id);
 }

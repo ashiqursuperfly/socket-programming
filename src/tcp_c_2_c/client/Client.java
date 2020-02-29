@@ -1,31 +1,25 @@
 package tcp_c_2_c.client;
 
+import tcp_c_2_c.server.User;
 import util.NetworkUtil;
 
 public class Client {
 
     private NetworkUtil networkUtil;
-    private String userName;
+    public User user;
 
-    public Client(String userName, String serverIp, int port) {
+    public Client(User user, String serverIp, int port) {
         this.networkUtil = new NetworkUtil(serverIp, port);
-        this.userName = userName;
+        this.user = user;
+    }
+
+    public Client(User user, NetworkUtil networkUtil) {
+        this.networkUtil = networkUtil;
+        this.user = user;
     }
 
     public NetworkUtil getNetworkUtil() {
         return networkUtil;
-    }
-
-    public void setNetworkUtil(NetworkUtil networkUtil) {
-        this.networkUtil = networkUtil;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public void initClientThreads(){

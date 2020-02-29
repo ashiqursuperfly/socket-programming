@@ -6,20 +6,11 @@ public class End2EndData implements Serializable {
 
     private static final long serialVersionUID = 103115L;
 
-    public String sourceIp,destinationIp,message;
+    public String sourcePhone, destinationPhone, message;
 
-    public End2EndData(String sourceIp, String destinationIp, String message) {
-        this.sourceIp = sourceIp;
-        this.destinationIp = destinationIp;
+    public End2EndData(String sourcePhone, String destinationPhone, String message) {
+        this.sourcePhone = sourcePhone;
+        this.destinationPhone = destinationPhone;
         this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return "End2EndData{" +
-                "sourceIp='" + sourceIp + '\'' +
-                ", destinationIp='" + destinationIp + '\'' +
-                ", message='" + message + '\'' +
-                '}';
     }
 }

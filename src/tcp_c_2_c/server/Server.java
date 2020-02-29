@@ -1,5 +1,6 @@
 package tcp_c_2_c.server;
 
+import tcp_c_2_c.client.Client;
 import util.NetworkUtil;
 
 import java.net.ServerSocket;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class Server implements C2CServerInterface {
 
-    private Map<String, User> clientsMap;
+    private Map<String, Client> clientsMap;
     private ServerSocket serverSocket;
     private static Server instance = new Server();
 
@@ -40,17 +41,17 @@ public class Server implements C2CServerInterface {
     }
 
     @Override
-    public void addNewUser(String id, User u){
-        clientsMap.put(id, u);
+    public void addNewClient(String id, Client c){
+        clientsMap.put(id, c);
     }
 
     @Override
-    public void removeUser(String id){
+    public void removeClient(String id){
         clientsMap.remove(id);
     }
 
     @Override
-    public User getUser(String id) {
+    public Client getClient(String id) {
         return clientsMap.get(id);
     }
 
