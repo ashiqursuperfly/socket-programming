@@ -1,5 +1,7 @@
 package tcp_c_2_c.client;
 
+import tcp_c_2_c.data.SignUpData;
+
 import java.util.Scanner;
 
 public class ClientWriteThread implements Runnable {
@@ -16,7 +18,8 @@ public class ClientWriteThread implements Runnable {
 	public void run() {
 
 		try {
-			// TODO: maybe send some kind off login info first time
+			client.getNetworkUtil().writeUnshared(new SignUpData(client.getUserName()));
+
 			Scanner input = new Scanner(System.in);
 			while (true) {
 				while (input.hasNextLine()) {

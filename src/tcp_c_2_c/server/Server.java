@@ -18,8 +18,7 @@ public class Server {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 var nc = new NetworkUtil(clientSocket);
-                new ServerReadThread(nc);
-                new ServerWriteThread(nc, "Server");
+                new ServerThread(nc);
             }
         } catch (Exception e) {
             System.out.println("Server couldn't start:" + e.toString());

@@ -36,7 +36,7 @@ public class NetworkUtil {
 		try {
 			o = ois.readUnshared();
 		} catch (Exception e) {
-			System.out.println("Reading Error in network : " + e.toString());
+		//	System.out.println("Reading Error in network : " + e.toString());
 		}
 		return o;
 	}
@@ -45,7 +45,7 @@ public class NetworkUtil {
 		try {
 			oos.writeUnshared(o);
 		} catch (IOException e) {
-			System.out.println("Writing  Error in network : " + e.toString());
+		//	System.out.println("Writing  Error in network : " + e.toString());
 		}
 	}
 

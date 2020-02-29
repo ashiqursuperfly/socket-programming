@@ -9,7 +9,7 @@ public class ClientMain {
     public static void main(String[] args) {
         try {
             //TODO: take server IP & port as input
-            String serverAddress = "localhost";
+            String serverAddress = "10.15.221.72";
             int serverPort = 20000;
             System.out.println("Looking for Server at:" + serverAddress + ":" + serverPort);
 

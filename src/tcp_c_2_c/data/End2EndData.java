@@ -14,4 +14,12 @@ public class End2EndData implements Serializable {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "End2EndData{" +
+                "sourceIp='" + sourceIp + '\'' +
+                ", destinationIp='" + destinationIp + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
