@@ -17,7 +17,7 @@ public class ClientReadThread implements Runnable {
             while (true) {
                 var o = client.getNetworkUtil().read();
                 if (o instanceof End2EndData)
-                    System.out.println(o);
+                    System.out.println((End2EndData)o);
                 else
                     System.out.println("Error Object Read");
             }

@@ -23,14 +23,14 @@ public class ClientWriteThread implements Runnable {
 
             Scanner input = new Scanner(System.in);
             while (true) {
-                while (input.hasNextLine()) {
+
                     System.out.println("Enter Unique Phone Number(to whom you want to send):");
                     String dest = input.nextLine();
                     System.out.println("Enter Message:");
                     String msg = input.nextLine();
 
                     client.getNetworkUtil().write(new End2EndData(client.user.phoneNo, dest, msg));
-                }
+
             }
         } catch (Exception e) {
             System.out.println(e.toString());

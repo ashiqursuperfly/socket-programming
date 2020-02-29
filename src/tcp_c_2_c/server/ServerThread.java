@@ -28,10 +28,14 @@ public class ServerThread implements Runnable {
                 } else if (o instanceof End2EndData) {
                     var endData = (End2EndData) o;
                     var destClient = Server.getInstance().getClient(endData.destinationPhone);
-					destClient.getNetworkUtil().writeUnshared(endData);
-					var srcClient = Server.getInstance().getClient(endData.sourcePhone);
+                    var srcClient = Server.getInstance().getClient(endData.sourcePhone);
 
-					System.out.println("Sending data from "+srcClient.user.userName+" to "+destClient.user.userName);
+                    if(destClient != null){
+                        destClient.getNetworkUtil().writeUnshared(endData);
+                        System.out.println("Sending data from "+srcClient.user.userName+" to "+destClient.user.userName);
+                    }
+					else System.out.println("No user logged in with phone"+endData.destinationPhone);
+
                 } else {
                     System.out.println("Error Object Read");
                 }
