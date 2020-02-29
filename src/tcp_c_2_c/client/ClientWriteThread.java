@@ -19,7 +19,7 @@ public class ClientWriteThread implements Runnable {
     public void run() {
 
         try {
-            client.getNetworkUtil().writeUnshared(new SignUpData(client.user.userName, client.user.phoneNo));
+            client.getNetworkUtil().write(new SignUpData(client.user.userName, client.user.phoneNo));
 
             Scanner input = new Scanner(System.in);
             while (true) {
