@@ -10,10 +10,10 @@ public class NetworkUtil {
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 
-	public NetworkUtil(String s, int port) {
+	public NetworkUtil(String ip, int port) {
 		System.out.println("New Client Connection establishing..");
 		try {
-			this.socket = new Socket(s, port);
+			this.socket = new Socket(ip, port);
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			ois = new ObjectInputStream(socket.getInputStream());
 		} catch (Exception e) {
@@ -34,7 +34,7 @@ public class NetworkUtil {
 	public Object read() {
 		Object o = null;
 		try {
-			o = ois.readObject();
+			o = ois.readUnshared();
 		} catch (Exception e) {
 			System.out.println("Reading Error in network : " + e.toString());
 		}
@@ -43,9 +43,19 @@ public class NetworkUtil {
 
 	public void write(Object o) {
 		try {
-			oos.writeObject(o);
+			oos.writeUnshared(o);
 		} catch (IOException e) {
 			System.out.println("Writing  Error in network : " + e.toString());
+		}
+	}
+
+	public void writeUnshared(Object o) {
+		try {
+			oos.reset();
+			oos.writeUnshared(o);
+			oos.flush();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

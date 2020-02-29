@@ -1,4 +1,4 @@
-package server;
+package tcp_c_2_c.server;
 
 import util.NetworkUtil;
 
@@ -21,7 +21,7 @@ public class ServerReadThread implements Runnable {
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			nc.closeConnection();
 		}
-		nc.closeConnection();
 	}
 }

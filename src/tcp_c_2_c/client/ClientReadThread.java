@@ -1,13 +1,11 @@
-package client;
-
-import util.NetworkUtil;
+package tcp_c_2_c.client;
 
 public class ClientReadThread implements Runnable {
     private Thread thr;
-    private NetworkUtil nc;
+    private Client client;
 
-    public ClientReadThread(NetworkUtil nc) {
-        this.nc = nc;
+    public ClientReadThread(Client client) {
+        this.client = client;
         this.thr = new Thread(this);
         thr.start();
     }
@@ -15,14 +13,14 @@ public class ClientReadThread implements Runnable {
     public void run() {
         try {
             while (true) {
-                String s = (String) nc.read();
+                String s = (String) client.getNetworkUtil().read();
                 if (s != null)
                     System.out.println(s);
             }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        nc.closeConnection();
+        client.getNetworkUtil().closeConnection();
 
     }
 }

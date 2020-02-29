@@ -1,9 +1,7 @@
-package server;
+package tcp_c_2_c.server;
 
 import util.NetworkUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ServerWriteThread implements Runnable {
