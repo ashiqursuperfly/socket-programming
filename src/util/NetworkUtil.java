@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class NetworkUtil {
+
 	private Socket socket;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
@@ -67,4 +68,9 @@ public class NetworkUtil {
 			System.out.println("Closing Error in network : " + e.toString());
 		}
 	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+
 }

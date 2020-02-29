@@ -1,15 +1,16 @@
 package tcp_c_2_c.server;
 
+import tcp_c_2_c.client.Client;
 import tcp_c_2_c.data.End2EndData;
 import tcp_c_2_c.data.SignUpData;
 import util.NetworkUtil;
 
 public class ServerThread implements Runnable {
 	private Thread thr;
-	private NetworkUtil nc;
+	private NetworkUtil clientNetworkUtil;
 
-	public ServerThread(NetworkUtil nc) {
-		this.nc = nc;
+	public ServerThread(NetworkUtil clientNetworkUtil) {
+		this.clientNetworkUtil = clientNetworkUtil;
 		this.thr = new Thread(this);
 		thr.start();
 	}
@@ -17,10 +18,10 @@ public class ServerThread implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				Object o = nc.read();
+				Object o = clientNetworkUtil.read();
 				if (o instanceof SignUpData){
-					//TODO: add to map
 					System.out.println("New User : "+ o);
+					Server.getInstance().addNewUser(generateUniqueId() ,new User(((SignUpData) o).userName));
 				}
 				else if (o instanceof End2EndData){
 					//TODO: convey to end client
@@ -31,7 +32,13 @@ public class ServerThread implements Runnable {
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
-			nc.closeConnection();
+			clientNetworkUtil.closeConnection();
 		}
+	}
+
+	private String generateUniqueId() {
+		var id = clientNetworkUtil.getSocket().getLocalAddress().toString() + clientNetworkUtil.getSocket().getLocalPort();
+		System.out.println("Generated unique id for new client :"+id);
+		return id;
 	}
 }

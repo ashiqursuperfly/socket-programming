@@ -4,12 +4,17 @@ import util.NetworkUtil;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Server {
+public class Server implements C2CServerInterface {
 
+    private Map<String, User> clientsMap;
     private ServerSocket serverSocket;
+    private static Server instance;
 
     private Server() {
+        clientsMap = new HashMap<>();
         try {
             int port = 20000;
             serverSocket = new ServerSocket(port);
@@ -18,16 +23,38 @@ public class Server {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 var nc = new NetworkUtil(clientSocket);
-                new ServerThread(nc);
+                new ServerThread( nc);
             }
         } catch (Exception e) {
             System.out.println("Server couldn't start:" + e.toString());
         }
     }
 
-    public static void main(String[] args) {
-        new Server();
+    public static Server getInstance() {
+        return instance;
     }
 
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    @Override
+    public void addNewUser(String id, User u){
+        clientsMap.put(id, u);
+    }
+
+    @Override
+    public void removeUser(String id){
+        clientsMap.remove(id);
+    }
+
+    @Override
+    public User getUser(String id) {
+        return clientsMap.get(id);
+    }
+
+    public static void main(String[] args) {
+        instance = new Server();
+    }
 
 }

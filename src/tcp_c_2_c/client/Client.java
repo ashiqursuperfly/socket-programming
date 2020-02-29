@@ -10,8 +10,6 @@ public class Client {
     public Client(String userName, String serverIp, int port) {
         this.networkUtil = new NetworkUtil(serverIp, port);
         this.userName = userName;
-        new ClientReadThread(this);
-        new ClientWriteThread(this);
     }
 
     public NetworkUtil getNetworkUtil() {
@@ -28,5 +26,10 @@ public class Client {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void initClientThreads(){
+        new ClientReadThread(this);
+        new ClientWriteThread(this);
     }
 }
