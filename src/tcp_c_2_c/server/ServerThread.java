@@ -21,7 +21,8 @@ public class ServerThread implements Runnable {
 				Object o = clientNetworkUtil.read();
 				if (o instanceof SignUpData){
 					System.out.println("New User : "+ o);
-					Server.getInstance().addNewUser(generateUniqueId() ,new User(((SignUpData) o).userName));
+					var signUpData = (SignUpData) o;
+					Server.getInstance().addNewUser(generateUniqueId() , new User(signUpData.userName));
 				}
 				else if (o instanceof End2EndData){
 					//TODO: convey to end client
@@ -37,7 +38,7 @@ public class ServerThread implements Runnable {
 	}
 
 	private String generateUniqueId() {
-		var id = clientNetworkUtil.getSocket().getLocalAddress().toString() + clientNetworkUtil.getSocket().getLocalPort();
+		var id = clientNetworkUtil.getSocket().getInetAddress().toString() + clientNetworkUtil.getSocket().getPort();
 		System.out.println("Generated unique id for new client :"+id);
 		return id;
 	}

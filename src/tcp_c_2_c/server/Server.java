@@ -11,7 +11,7 @@ public class Server implements C2CServerInterface {
 
     private Map<String, User> clientsMap;
     private ServerSocket serverSocket;
-    private static Server instance;
+    private static Server instance = new Server();
 
     private Server() {
         clientsMap = new HashMap<>();
@@ -23,7 +23,8 @@ public class Server implements C2CServerInterface {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 var nc = new NetworkUtil(clientSocket);
-                new ServerThread( nc);
+                System.out.println("Accepted Client Socket:"+clientSocket.getInetAddress().toString()+":"+clientSocket.getLocalPort());
+                new ServerThread(nc);
             }
         } catch (Exception e) {
             System.out.println("Server couldn't start:" + e.toString());
@@ -53,8 +54,6 @@ public class Server implements C2CServerInterface {
         return clientsMap.get(id);
     }
 
-    public static void main(String[] args) {
-        instance = new Server();
-    }
+    public static void main(String[] args) { }
 
 }
