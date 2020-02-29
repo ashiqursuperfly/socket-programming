@@ -28,6 +28,6 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return sender + " to " + receiver + " : " + text;
+        return sender + " : " + text;
     }
 }

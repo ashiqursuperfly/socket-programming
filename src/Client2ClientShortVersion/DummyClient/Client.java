@@ -1,4 +1,4 @@
-package Client2ClientShortVersion.Client;
+package Client2ClientShortVersion.DummyClient;
 
 import Client2ClientShortVersion.Util.NetworkUtil;
 

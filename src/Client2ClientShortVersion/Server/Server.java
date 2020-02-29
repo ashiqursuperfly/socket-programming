@@ -17,9 +17,12 @@ public class Server {
         this.clientMap = new HashMap<>();
         try {
             this.serverSocket = new ServerSocket(20000);
+            System.out.println("Server is Running !");
+
             while (true){
                 Socket socket = serverSocket.accept();
                 NetworkUtil networkUtil = new NetworkUtil(socket);
+                System.out.println("Accepted Client Socket:"+socket.getInetAddress().toString()+":"+socket.getPort());
                 new ServerThread(networkUtil, this);
             }
         } catch (IOException e) {
