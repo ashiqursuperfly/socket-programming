@@ -1,4 +1,4 @@
-package tcp_c_2_c.client;
+package dummy_client.client;
 
 import tcp_c_2_c.server.User;
 

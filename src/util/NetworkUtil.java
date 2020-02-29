@@ -35,7 +35,7 @@ public class NetworkUtil {
 	public Object read() {
 		Object o = null;
 		try {
-			o = ois.readUnshared();
+			o = ois.readObject();
 		} catch (Exception e) {
 		//	System.out.println("Reading Error in network : " + e.toString());
 		}
@@ -44,19 +44,9 @@ public class NetworkUtil {
 
 	public void write(Object o) {
 		try {
-			oos.writeUnshared(o);
+			oos.writeObject(o);
 		} catch (IOException e) {
 		//	System.out.println("Writing  Error in network : " + e.toString());
-		}
-	}
-
-	public void writeUnshared(Object o) {
-		try {
-			oos.reset();
-			oos.writeUnshared(o);
-			oos.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
 		}
 	}
 
